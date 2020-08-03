@@ -8,6 +8,7 @@ import click
 from vlab_cli.lib.api import consume_task
 from vlab_cli.lib import api
 from vlab_cli.lib.portmap_helpers import get_component_protocols
+    
 @click.command()
 @click.option('--shortcutscreate', is_flag=True, help='Create shorcuts for your VMs')
 @click.pass_context
@@ -50,19 +51,13 @@ def ShortcutsCreate(ctx):
                 ips = '\n'.join(addrs)
             path = os.path.join(desktop, "{}.lnk".format(vm))
              
-            if (ssh in protocollist) and (gui in protocollist)
-                arguments="vlab connect {} -p ssh".format(vm))
-                winshell.CreateShortcut(path,target,Arguments="", StartIn=r"C:\Windows\System32\WindowsPowerShell\v1.0", Icon=("", 0), Description="")
-                winshell.CreateShortcut(path,target,Arguments="gci", StartIn=r"C:\Windows\System32\WindowsPowerShell\v1.0", Icon=("", 0), Description="")
-
-            elif kind in []
-
-            else: 
-                
-
-            print(vm)
-          
-
+            if (('ssh' or 'rdp') in protocollist) and ('gui' in protocollist):
+                Arguments="vlab connect {} {} -p ssh".format(kind,vm)
+                winshell.CreateShortcut(path,target,Arguments, StartIn=r"C:\Windows\System32\WindowsPowerShell\v1.0", Icon=("", 0), Description="")
+                Arguments="vlab connect {} {} -p ssh".format(kind,vm)
+                winshell.CreateShortcut(path,target,Arguments, StartIn=r"C:\Windows\System32\WindowsPowerShell\v1.0", Icon=("", 0), Description="")
+            else:
+                pass
    
 
 
